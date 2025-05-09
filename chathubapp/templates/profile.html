@@ -1,0 +1,13 @@
+<h2>Merhaba {{ user.username }}</h2>
+<form method="post">
+  {% csrf_token %}
+  <textarea name="message" rows="3"></textarea><br>
+  <button type="submit">Gönder</button>
+</form>
+
+<h3>Geçmiş Sohbetler</h3>
+{% for chat in messages %}
+  <p><strong>Sen:</strong> {{ chat.message }}</p>
+  <p><strong>Gemini:</strong> {{ chat.response }}</p>
+  <hr>
+{% endfor %}
