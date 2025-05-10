@@ -1,13 +1,11 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import User
 
 class ChatMessage(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # ForeignKey ile User modeli
     message = models.TextField()
     response = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username} - {self.timestamp}'# pylint: disable=no-member
+        return f"Message from {self.user.username} at {self.timestamp}"  # user.username ile erişim

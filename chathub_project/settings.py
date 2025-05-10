@@ -12,13 +12,18 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
+import os
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')  # .env yolunu belirtin
+print(os.getenv('GOOGLE_API_KEY'))  # Bu çalışıyor mu?
 
-import os #added by me
+
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") #added by me
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Güvenlik ayarları
+CSRF_COOKIE_HTTPONLY = False  # JavaScript'ten okunabilmesi için
+CSRF_USE_SESSIONS = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -53,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'chathub_project.urls'
